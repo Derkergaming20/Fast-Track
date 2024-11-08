@@ -1,6 +1,6 @@
 # Fast-Track
 Features                    |          Status
-User Management             -  
+User Management             -  Done (but no CRUD)
 User Authentication         -  Done (but without explanation)
 Ticket Management           -
 Ticket Assignment           -
