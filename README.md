@@ -1,8 +1,8 @@
 # Fast-Track
 Features                    |          Status
-User Management             -  Done (but no CRUD)
+User Management             -  Done (but without explanation)
 User Authentication         -  Done (but without explanation)
-Ticket Management           -
+Ticket Management           -  Done (but without exlpanation)
 Ticket Assignment           -
 Ticket Tracking             -
 Notifications               -
