@@ -7,7 +7,6 @@ public class SignUp {
 
     private static final String USER_FILE = "users.txt";
 
-    // Method to handle sign-up functionality
     public static void handleSignUp(Scanner input) {
         System.out.print("Enter Username: ");
         String userName = input.nextLine();
