@@ -1,2 +1,0 @@
-303,chairman,nagduwa,Urgent and Important
-511,Derker,samad,Urgent but not important
