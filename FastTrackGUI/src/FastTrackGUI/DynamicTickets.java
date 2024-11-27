@@ -7,7 +7,7 @@ public class DynamicTickets {
 
     public static void main(String[] args) {
 
-//Choose Ticket Panel 
+// Choose Ticket Panel
         JPanel chooseTicketPanel = new JPanel();
         chooseTicketPanel.setBounds(0, 0, 200, 700);
         chooseTicketPanel.setLayout(new BoxLayout(chooseTicketPanel, BoxLayout.Y_AXIS));
@@ -67,42 +67,67 @@ public class DynamicTickets {
         JPanel createTicketPanel = new JPanel();
         createTicketPanel.setBackground(Color.GRAY);
         createTicketPanel.setBounds(200, 0, 600, 700);
-        createTicketPanel.setLayout(new BoxLayout(createTicketPanel, BoxLayout.Y_AXIS));
+        createTicketPanel.setLayout(null);
 
         JLabel createTicketLabel = new JLabel("Create Ticket");
-        createTicketLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         createTicketLabel.setFont(new Font("Arial", Font.BOLD, 20));
         createTicketLabel.setForeground(Color.BLACK);
-
-        createTicketPanel.add(Box.createVerticalStrut(25));
+        createTicketLabel.setBounds(220, 30, 300, 40);
         createTicketPanel.add(createTicketLabel);
-        createTicketPanel.add(Box.createVerticalStrut(25));
 
-// Create a sub-panel with FlowLayout for right-alignment
-        JPanel rightAlignPanel = new JPanel();
-        rightAlignPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        rightAlignPanel.setBackground(Color.GRAY);
+// Sub-panel for inputs with null layout for absolute positioning
+        JPanel details = new JPanel();
+        details.setLayout(null);
+        details.setBackground(Color.LIGHT_GRAY);
+        details.setBounds(25, 100, 550, 535);
 
-        JLabel usernameLabel = new JLabel("Username:");
+// Username Label and TextField
+        JLabel usernameLabel = new JLabel("Username");
         usernameLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        rightAlignPanel.add(usernameLabel);
-        
+        usernameLabel.setBounds(20, 20, 100, 30);
+        details.add(usernameLabel);
+
         JTextField usernameField = new JTextField();
-        usernameField.setPreferredSize(new Dimension(450, 30));
-        rightAlignPanel.add(usernameField);
+        usernameField.setPreferredSize(new Dimension(200, 30));
+        usernameField.setBounds(130, 20, 200, 30);
+        details.add(usernameField);
 
-        createTicketPanel.add(rightAlignPanel);
-        
-        JLabel descriptionLabel = new JLabel("Description:");
+// Description Label and TextField
+        JLabel descriptionLabel = new JLabel("Description");
         descriptionLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        rightAlignPanel.add(descriptionLabel);
-        
-        JTextField descriptionField = new JTextField();
-        descriptionField.setPreferredSize(new Dimension(500, 90));
-        rightAlignPanel.add(descriptionField);
+        descriptionLabel.setBounds(20, 70, 100, 30);
+        details.add(descriptionLabel);
 
-        createTicketPanel.add(rightAlignPanel);
-        createTicketPanel.add(Box.createVerticalStrut(30));
+        JTextField descriptionField = new JTextField();
+        descriptionField.setPreferredSize(new Dimension(340, 90));
+        descriptionField.setBounds(130, 70, 340, 90);
+        details.add(descriptionField);
+        
+//Priority Label and TextField
+        JLabel priorityLabel = new JLabel("Priority");
+        priorityLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        priorityLabel.setBounds(20, 180, 100, 30);  // Positioned below the description
+        details.add(priorityLabel);
+        
+//Change the priority field into DropDown
+        JTextField priorityField = new JTextField();
+        priorityField.setPreferredSize(new Dimension(340, 90));
+        priorityField.setBounds(130, 180, 200, 30);
+        details.add(priorityField);
+        
+//Urgency Label and TextField
+        JLabel urgencyLabel = new JLabel("Urgency");
+        urgencyLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        urgencyLabel.setBounds(20, 220, 100, 30);  // Positioned below the description
+        details.add(urgencyLabel);
+        
+//Change the priority field into DropDown
+        JTextField urgencyField = new JTextField();
+        urgencyField.setPreferredSize(new Dimension(340, 90));
+        urgencyField.setBounds(130, 220, 200, 30);
+        details.add(urgencyField);
+
+        createTicketPanel.add(details);
 
 // Third Panel (can be removed or adjusted based on your needs)
         JPanel thirdPanel = new JPanel();

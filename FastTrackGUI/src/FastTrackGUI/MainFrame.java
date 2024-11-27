@@ -27,7 +27,7 @@ public class MainFrame {
         signInFrame.setIconImage(logo1.getImage());
         signInFrame.getContentPane().setBackground(new Color(0x87CEEB));
 
-        // Create the Login Panel
+// Create the Login Panel
         JPanel loginPanel = new JPanel();
         loginPanel.setBackground(Color.white);
         loginPanel.setBounds(50, 70, 480, 400);
@@ -71,7 +71,7 @@ public class MainFrame {
         signInButton.setFocusable(false);
         loginPanel.add(signInButton);
 
-        // Action listener for the login button
+// Action listener for the login button
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,7 +85,7 @@ public class MainFrame {
             }
         });
 
-        // Action listener for the sign-in button
+// Action listener for the sign-in button
         signInButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -95,7 +95,7 @@ public class MainFrame {
             }
         });
 
-        // Create the SignIn Panel
+// Create the SignIn Panel
         JPanel signInPanel = new JPanel();
         signInPanel.setBackground(Color.white);
         signInPanel.setBounds(50, 70, 480, 400);
@@ -139,7 +139,7 @@ public class MainFrame {
         backToLoginButton.setFocusable(false);
         signInPanel.add(backToLoginButton);
 
-        // Action listener for the back-to-login button
+// Action listener for the back-to-login button
         backToLoginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -149,7 +149,7 @@ public class MainFrame {
             }
         });
 
-        // Action listener for the sign-up button
+// Action listener for the sign-up button
         signUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -163,23 +163,23 @@ public class MainFrame {
             }
         });
 
-        // Add the panels to the frames
+// Add the panels to the frames
         loginFrame.add(loginPanel);
         signInFrame.add(signInPanel);
 
-        // Initially, show the login frame
+// Initially, show the login frame
         loginFrame.setVisible(true);
         signInFrame.setVisible(false);
     }
 
-    // Method to show a custom dialog without borders
+// Method to show a custom dialog without borders
     private static void showCustomDialog(JFrame parentFrame, String message) {
         JDialog dialog = new JDialog(parentFrame, "Success", true);
         dialog.setLayout(new BorderLayout());
         dialog.setSize(300, 150);
         dialog.setLocationRelativeTo(parentFrame);
 
-        // Create a panel with no border for the message
+// Create a panel with no border for the message
         JPanel panel = new JPanel();
         panel.setBackground(Color.white);
         JLabel label = new JLabel(message);
@@ -188,7 +188,7 @@ public class MainFrame {
 
         dialog.add(panel, BorderLayout.CENTER);
 
-        // Button to close the dialog
+// Button to close the dialog
         JButton closeButton = new JButton("OK");
         closeButton.setFocusable(false);
         closeButton.addActionListener(new ActionListener() {
