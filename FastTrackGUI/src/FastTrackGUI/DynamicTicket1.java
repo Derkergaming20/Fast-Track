@@ -5,10 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DynamicTickets {
+public class DynamicTicket1 {
 
     public static void main(String[] args) {
-        // Main Frame setup
+        // Main Frame
         JFrame frame = new JFrame("FastTrack Solutions");
         frame.setSize(1000, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,36 +76,15 @@ public class DynamicTickets {
         assignedToField1.setBounds(130, 320, 200, 30);
         details1.add(createLabeledField(details1, "Assigned To", 320, 320));
 
-        // Submit and Cancel buttons
+        // Button for Submit and Cancel
         JButton submitButton = new JButton("Submit");
         submitButton.setBounds(30, 400, 200, 30);
-        submitButton.addActionListener(e -> {
-            String username = usernameField1.getText();
-            String subject = subjectField1.getText();
-            String description = descriptionField1.getText();
-            String priority = priorityField1.getText();
-            String createdDate = createdDateField1.getText();
-            String assignedTo = assignedToField1.getText();
-
-            if (!username.isEmpty() && !subject.isEmpty() && !description.isEmpty()) {
-                System.out.println("Ticket submitted: " + subject);
-            } else {
-                System.out.println("Please fill in all the fields.");
-            }
-        });
+        submitButton.addActionListener(e -> System.out.println("Submit button clicked!"));
         details1.add(submitButton);
 
         JButton cancelButton1 = new JButton("Cancel");
         cancelButton1.setBounds(300, 400, 200, 30);
-        cancelButton1.addActionListener(e -> {
-            usernameField1.setText("");
-            subjectField1.setText("");
-            descriptionField1.setText("");
-            priorityField1.setText("");
-            createdDateField1.setText("");
-            assignedToField1.setText("");
-            System.out.println("Ticket creation cancelled.");
-        });
+        cancelButton1.addActionListener(e -> System.out.println("Cancel button clicked!"));
         details1.add(cancelButton1);
 
         createTicketPanel.add(details1);
@@ -159,22 +138,13 @@ public class DynamicTickets {
         // Save Button
         JButton saveButton = new JButton("Save");
         saveButton.setBounds(30, 400, 200, 30);
-        saveButton.addActionListener(e -> {
-            String username = usernameField2.getText();
-            String subject = subjectField2.getText();
-            String description = descriptionField2.getText();
-            String priority = priorityField2.getText();
-            String createdDate = createdDateField2.getText();
-            String assignedTo = assignedToField2.getText();
-
-            System.out.println("Ticket edited and saved: " + subject);
-        });
+        saveButton.addActionListener(e -> System.out.println("Save button clicked!"));
         details2.add(saveButton);
 
         // Cancel Button
         JButton cancelButton2 = new JButton("Cancel");
         cancelButton2.setBounds(300, 400, 200, 30);
-        cancelButton2.addActionListener(e -> System.out.println("Edit cancelled."));
+        cancelButton2.addActionListener(e -> System.out.println("Cancel button clicked!"));
         details2.add(cancelButton2);
 
         editTicketPanel.add(details2);
@@ -194,6 +164,7 @@ public class DynamicTickets {
                 {"1", "Derker", "Issue with login", "I Cant login", "High", "10-20-20", "Nigga"},
         };
 
+
         JTable ticketTable = new JTable(data, columnNames);
         JScrollPane scrollPane = new JScrollPane(ticketTable);
         ticketListPanel.add(scrollPane, BorderLayout.CENTER);
@@ -207,6 +178,7 @@ public class DynamicTickets {
                 if (selectedRow != -1) {
                     String ticketID = (String) ticketTable.getValueAt(selectedRow, 0);
                     System.out.println("Viewing ticket with ID: " + ticketID);
+                    // You can switch to a "View Ticket" panel with the details
                 } else {
                     System.out.println("No ticket selected!");
                 }
@@ -215,52 +187,162 @@ public class DynamicTickets {
 
         ticketListPanel.add(viewTicketButton, BorderLayout.SOUTH);
 
-        // Settings Panel (simplified example)
+        // View Ticket Panel
+        JPanel viewTicketPanel = new JPanel();
+        viewTicketPanel.setBackground(Color.ORANGE);
+        viewTicketPanel.setLayout(null);
+
+        JLabel viewLabel = new JLabel("View Ticket");
+        viewLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        viewLabel.setBounds(220, 30, 300, 40);
+        viewTicketPanel.add(viewLabel);
+
+        // Input field for ticket ID (to view the ticket)
+        JPanel details4 = new JPanel();
+        details4.setLayout(null);
+        details4.setBackground(Color.LIGHT_GRAY);
+        details4.setBounds(25, 100, 550, 535);
+
+        JTextField ticketIDFieldView = new JTextField();
+        ticketIDFieldView.setBounds(130, 20, 200, 30);
+        details4.add(createLabeledField(details4, "Ticket ID", 20, 20));
+
+        // View Button
+        JButton viewButton = new JButton("View");
+        viewButton.setBounds(30, 400, 200, 30);
+        viewButton.addActionListener(e -> {
+            String ticketID = ticketIDFieldView.getText();
+            if (!ticketID.isEmpty()) {
+                System.out.println("Viewing ticket with ID " + ticketID);
+            } else {
+                System.out.println("Please enter a valid Ticket ID.");
+            }
+        });
+        details4.add(viewButton);
+
+        // Cancel Button
+        JButton cancelViewButton = new JButton("Cancel");
+        cancelViewButton.setBounds(300, 400, 200, 30);
+        cancelViewButton.addActionListener(e -> {
+            System.out.println("Cancel button clicked!");
+        });
+        details4.add(cancelViewButton);
+
+        viewTicketPanel.add(details4);
+
+        // Settings Panel (New Panel for Settings)
         JPanel settingsPanel = new JPanel();
         settingsPanel.setBackground(Color.CYAN);
+        settingsPanel.setLayout(null);
 
-        // Combo box for theme selection
-        JComboBox<String> themeComboBox = new JComboBox<>(new String[]{"Light", "Dark"});
+        JLabel settingsLabel = new JLabel("Settings");
+        settingsLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        settingsLabel.setBounds(220, 30, 300, 40);
+        settingsPanel.add(settingsLabel);
+
+        // Add settings options
+        JLabel themeLabel = new JLabel("Choose Theme:");
+        themeLabel.setBounds(50, 100, 150, 30);
+        settingsPanel.add(themeLabel);
+
+        String[] themes = {"Light", "Dark"};
+        JComboBox<String> themeComboBox = new JComboBox<>(themes);
+        themeComboBox.setBounds(200, 100, 150, 30);
         settingsPanel.add(themeComboBox);
 
-        // Checkbox for enabling/disabling notifications
-        JCheckBox notificationCheckBox = new JCheckBox("Enable Notifications");
+        JLabel notificationLabel = new JLabel("Enable Notifications:");
+        notificationLabel.setBounds(50, 150, 150, 30);
+        settingsPanel.add(notificationLabel);
+
+        JCheckBox notificationCheckBox = new JCheckBox();
+        notificationCheckBox.setBounds(200, 150, 50, 30);
         settingsPanel.add(notificationCheckBox);
 
-        // Save Settings Button
+        // Save Button for Settings
         JButton saveSettingsButton = new JButton("Save Settings");
-        saveSettingsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedTheme = (String) themeComboBox.getSelectedItem();
-                boolean notificationsEnabled = notificationCheckBox.isSelected();
-                System.out.println("Settings saved: Theme - " + selectedTheme + ", Notifications enabled: " + notificationsEnabled);
-            }
-        });
+        saveSettingsButton.setBounds(50, 250, 150, 30);
         settingsPanel.add(saveSettingsButton);
 
-        // Cancel Settings Button
-        JButton cancelSettingsButton = new JButton("Cancel Settings");
-        cancelSettingsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Settings changes cancelled.");
-            }
-        });
+        // Cancel Button for Settings
+        JButton cancelSettingsButton = new JButton("Cancel");
+        cancelSettingsButton.setBounds(250, 250, 150, 30);
         settingsPanel.add(cancelSettingsButton);
 
-        // Add Panels to the mainPanel (card layout)
+        // Add panels to CardLayout
         mainPanel.add(homePanel, "Home");
-        mainPanel.add(createTicketPanel, "Create Ticket");
-        mainPanel.add(editTicketPanel, "Edit Ticket");
-        mainPanel.add(ticketListPanel, "Ticket List");
+        mainPanel.add(createTicketPanel, "CreateTicket");
+        mainPanel.add(editTicketPanel, "EditTicket");
+        mainPanel.add(ticketListPanel, "TicketList");
+        mainPanel.add(viewTicketPanel, "ViewTicket");
         mainPanel.add(settingsPanel, "Settings");
 
-        // Add mainPanel to the frame
+        // Navigation Panel with Settings Button
+        JPanel chooseTicketPanel = new JPanel();
+        chooseTicketPanel.setBounds(0, 0, 200, 700);
+        chooseTicketPanel.setLayout(new BoxLayout(chooseTicketPanel, BoxLayout.Y_AXIS));
+        chooseTicketPanel.setBorder(BorderFactory.createEmptyBorder(50, 20, 20, 20));
+        chooseTicketPanel.setBackground(new Color(0x87CEEB));
+
+        JLabel firstLabelTitle = new JLabel("Navigation Panel");
+        firstLabelTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        firstLabelTitle.setFont(new Font("Arial", Font.BOLD, 20));
+        chooseTicketPanel.add(firstLabelTitle);
+        chooseTicketPanel.add(Box.createVerticalStrut(55));
+
+        // Buttons with ActionListeners to switch panels
+        JButton homeButtonTitle = createButton("Home");
+        homeButtonTitle.addActionListener(e -> switchPanel(mainPanel, "Home"));
+        chooseTicketPanel.add(homeButtonTitle);
+        chooseTicketPanel.add(Box.createVerticalStrut(25));
+
+        JButton createButtonTitle = createButton("Create Ticket");
+        createButtonTitle.addActionListener(e -> switchPanel(mainPanel, "CreateTicket"));
+        chooseTicketPanel.add(createButtonTitle);
+        chooseTicketPanel.add(Box.createVerticalStrut(25));
+
+        JButton editButtonTitle = createButton("Edit Ticket");
+        editButtonTitle.addActionListener(e -> switchPanel(mainPanel, "EditTicket"));
+        chooseTicketPanel.add(editButtonTitle);
+        chooseTicketPanel.add(Box.createVerticalStrut(25));
+
+        JButton viewButtonTitle = createButton("View Ticket");
+        viewButtonTitle.addActionListener(e -> switchPanel(mainPanel, "ViewTicket"));
+        chooseTicketPanel.add(viewButtonTitle);
+        chooseTicketPanel.add(Box.createVerticalStrut(25));
+
+        JButton ticketListButton = createButton("Ticket List");
+        ticketListButton.addActionListener(e -> switchPanel(mainPanel, "TicketList"));
+        chooseTicketPanel.add(ticketListButton);
+        chooseTicketPanel.add(Box.createVerticalStrut(145));
+
+        // Settings Button (New)
+        JButton settingsButton = createButton("Settings");
+        settingsButton.addActionListener(e -> switchPanel(mainPanel, "Settings"));
+        chooseTicketPanel.add(settingsButton);
+
+        // Add components to the frame
+        frame.add(chooseTicketPanel);
         frame.add(mainPanel);
 
-        // Display the frame
         frame.setVisible(true);
+    }
+
+    // Helper method to create buttons with consistent styling
+    private static JButton createButton(String text) {
+        JButton button = new JButton(text);
+        button.setFocusable(false);
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        button.setPreferredSize(new Dimension(150, 40));
+        button.setBackground(Color.WHITE);
+        button.setForeground(Color.BLACK);
+        button.setFont(new Font("Arial", Font.BOLD, 14));
+        return button;
+    }
+
+    // Helper method to switch panels in CardLayout
+    private static void switchPanel(JPanel mainPanel, String panelName) {
+        CardLayout cardLayout = (CardLayout) mainPanel.getLayout();
+        cardLayout.show(mainPanel, panelName);
     }
 
     // Helper method to create labeled fields
