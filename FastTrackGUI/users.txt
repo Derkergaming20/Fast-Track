@@ -1,2 +1,0 @@
-978,admin,admin123,Admin
-311,Derker,123,User
