@@ -8,19 +8,19 @@ import java.awt.event.ActionListener;
 public class DynamicTicket1 {
 
     public static void main(String[] args) {
-        // Main Frame
+// Main Frame
         JFrame frame = new JFrame("FastTrack Solutions");
-        frame.setSize(1000, 700);
+        frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.setResizable(false);
         frame.getContentPane().setBackground(new Color(0x87CEEB));
 
-        // CardLayout to switch between panels
+// CardLayout to switch between panels
         JPanel mainPanel = new JPanel(new CardLayout());
-        mainPanel.setBounds(200, 0, 600, 700);
+        mainPanel.setBounds(200, 0, 590, 700);
 
-        // Home Panel
+// Home Panel
         JPanel homePanel = new JPanel();
         homePanel.setBackground(Color.GREEN);
         homePanel.setLayout(new BoxLayout(homePanel, BoxLayout.Y_AXIS));
@@ -31,21 +31,21 @@ public class DynamicTicket1 {
         homePanel.add(Box.createVerticalStrut(52));
         homePanel.add(homeLabel);
 
-        // Create Ticket Panel
+// Create Ticket Panel
         JPanel createTicketPanel = new JPanel();
         createTicketPanel.setBackground(Color.GRAY);
         createTicketPanel.setLayout(null);
 
         JLabel createTicketLabel = new JLabel("Create Ticket");
         createTicketLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        createTicketLabel.setBounds(220, 30, 300, 40);
+        createTicketLabel.setBounds(225, 30, 300, 40);
         createTicketPanel.add(createTicketLabel);
 
-        // Add input fields to Create Ticket Panel
+// Add input fields to Create Ticket Panel
         JPanel details1 = new JPanel();
         details1.setLayout(null);
         details1.setBackground(Color.LIGHT_GRAY);
-        details1.setBounds(25, 100, 550, 535);
+        details1.setBounds(25, 100, 540, 535);
 
         JTextField usernameField1 = new JTextField();
         usernameField1.setBounds(130, 20, 200, 30);
@@ -59,10 +59,10 @@ public class DynamicTicket1 {
         descriptionField1.setBounds(130, 120, 340, 90);
         details1.add(descriptionField1);
 
-        JLabel descriptionLabel1 = new JLabel("Description");
-        descriptionLabel1.setBounds(20, 120, 100, 30);
-        descriptionLabel1.setFont(new Font("Arial", Font.BOLD, 16));
-        details1.add(descriptionLabel1);
+        JLabel descriptionLabe1 = new JLabel("Description");
+        descriptionLabe1.setBounds(20, 120, 100, 30);
+        descriptionLabe1.setFont(new Font("Arial", Font.BOLD, 16));
+        details1.add(descriptionLabe1);
 
         JTextField priorityField1 = new JTextField();
         priorityField1.setBounds(130, 220, 200, 30);
@@ -76,7 +76,7 @@ public class DynamicTicket1 {
         assignedToField1.setBounds(130, 320, 200, 30);
         details1.add(createLabeledField(details1, "Assigned To", 320, 320));
 
-        // Button for Submit and Cancel
+// Button for Submit and Cancel
         JButton submitButton = new JButton("Submit");
         submitButton.setBounds(30, 400, 200, 30);
         submitButton.addActionListener(e -> System.out.println("Submit button clicked!"));
@@ -89,7 +89,7 @@ public class DynamicTicket1 {
 
         createTicketPanel.add(details1);
 
-        // Edit Ticket Panel
+// Edit Ticket Panel
         JPanel editTicketPanel = new JPanel();
         editTicketPanel.setBackground(Color.BLUE);
         editTicketPanel.setLayout(null);
@@ -97,14 +97,14 @@ public class DynamicTicket1 {
         JLabel editLabel = new JLabel("Edit Ticket");
         editLabel.setFont(new Font("Arial", Font.BOLD, 20));
         editLabel.setForeground(Color.WHITE);
-        editLabel.setBounds(220, 30, 300, 40);
+        editLabel.setBounds(225, 30, 300, 40);
         editTicketPanel.add(editLabel);
 
-        // Details Sub-panel for Editing
+// Details Sub-panel for Editing
         JPanel details2 = new JPanel();
         details2.setLayout(null);
         details2.setBackground(Color.LIGHT_GRAY);
-        details2.setBounds(25, 100, 550, 535);
+        details2.setBounds(25, 100, 540, 535);
 
         JTextField usernameField2 = new JTextField();
         usernameField2.setBounds(130, 20, 200, 30);
@@ -118,10 +118,10 @@ public class DynamicTicket1 {
         descriptionField2.setBounds(130, 120, 340, 90);
         details2.add(descriptionField2);
 
-        JLabel descriptionLabel = new JLabel("Description");
-        descriptionLabel.setBounds(20, 120, 100, 30);
-        descriptionLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        details2.add(descriptionLabel);
+        JLabel descriptionLabe2 = new JLabel("Description");
+        descriptionLabe2.setBounds(20, 120, 100, 30);
+        descriptionLabe2.setFont(new Font("Arial", Font.BOLD, 16));
+        details2.add(descriptionLabe2);
 
         JTextField priorityField2 = new JTextField();
         priorityField2.setBounds(130, 220, 200, 30);
@@ -135,13 +135,12 @@ public class DynamicTicket1 {
         assignedToField2.setBounds(130, 320, 200, 30);
         details2.add(createLabeledField(details2, "Assigned To", 320, 320));
 
-        // Save Button
+// Save and Cancel Button
         JButton saveButton = new JButton("Save");
         saveButton.setBounds(30, 400, 200, 30);
         saveButton.addActionListener(e -> System.out.println("Save button clicked!"));
         details2.add(saveButton);
 
-        // Cancel Button
         JButton cancelButton2 = new JButton("Cancel");
         cancelButton2.setBounds(300, 400, 200, 30);
         cancelButton2.addActionListener(e -> System.out.println("Cancel button clicked!"));
@@ -149,7 +148,7 @@ public class DynamicTicket1 {
 
         editTicketPanel.add(details2);
 
-        // Ticket List Panel (new panel for displaying ticket list)
+// Ticket List Panel (new panel for displaying ticket list)
         JPanel ticketListPanel = new JPanel();
         ticketListPanel.setBackground(Color.YELLOW);
         ticketListPanel.setLayout(new BorderLayout());
@@ -158,7 +157,7 @@ public class DynamicTicket1 {
         ticketListLabel.setFont(new Font("Arial", Font.BOLD, 20));
         ticketListPanel.add(ticketListLabel, BorderLayout.NORTH);
 
-        // Create a sample list of tickets
+// Create a sample list of tickets
         String[] columnNames = {"Ticket ID", "Username", "Subject", "Description", "Priority", "Created Date", "Assigned To"};
         Object[][] data = {
                 {"1", "Derker", "Issue with login", "I Cant login", "High", "10-20-20", "Nigga"},
@@ -187,17 +186,17 @@ public class DynamicTicket1 {
 
         ticketListPanel.add(viewTicketButton, BorderLayout.SOUTH);
 
-        // View Ticket Panel
+// View Ticket Panel
         JPanel viewTicketPanel = new JPanel();
         viewTicketPanel.setBackground(Color.ORANGE);
         viewTicketPanel.setLayout(null);
 
         JLabel viewLabel = new JLabel("View Ticket");
         viewLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        viewLabel.setBounds(220, 30, 300, 40);
+        viewLabel.setBounds(225, 30, 300, 40);
         viewTicketPanel.add(viewLabel);
 
-        // Input field for ticket ID (to view the ticket)
+// Input field for ticket ID (to view the ticket)
         JPanel details4 = new JPanel();
         details4.setLayout(null);
         details4.setBackground(Color.LIGHT_GRAY);
@@ -207,7 +206,7 @@ public class DynamicTicket1 {
         ticketIDFieldView.setBounds(130, 20, 200, 30);
         details4.add(createLabeledField(details4, "Ticket ID", 20, 20));
 
-        // View Button
+// View and Cancel Button
         JButton viewButton = new JButton("View");
         viewButton.setBounds(30, 400, 200, 30);
         viewButton.addActionListener(e -> {
@@ -220,7 +219,6 @@ public class DynamicTicket1 {
         });
         details4.add(viewButton);
 
-        // Cancel Button
         JButton cancelViewButton = new JButton("Cancel");
         cancelViewButton.setBounds(300, 400, 200, 30);
         cancelViewButton.addActionListener(e -> {
@@ -230,7 +228,7 @@ public class DynamicTicket1 {
 
         viewTicketPanel.add(details4);
 
-        // Settings Panel (New Panel for Settings)
+// Settings Panel (New Panel for Settings)
         JPanel settingsPanel = new JPanel();
         settingsPanel.setBackground(Color.CYAN);
         settingsPanel.setLayout(null);
@@ -240,7 +238,7 @@ public class DynamicTicket1 {
         settingsLabel.setBounds(220, 30, 300, 40);
         settingsPanel.add(settingsLabel);
 
-        // Add settings options
+// Add settings options
         JLabel themeLabel = new JLabel("Choose Theme:");
         themeLabel.setBounds(50, 100, 150, 30);
         settingsPanel.add(themeLabel);
@@ -258,17 +256,17 @@ public class DynamicTicket1 {
         notificationCheckBox.setBounds(200, 150, 50, 30);
         settingsPanel.add(notificationCheckBox);
 
-        // Save Button for Settings
+// Save Button for Settings
         JButton saveSettingsButton = new JButton("Save Settings");
         saveSettingsButton.setBounds(50, 250, 150, 30);
         settingsPanel.add(saveSettingsButton);
 
-        // Cancel Button for Settings
+// Cancel Button for Settings
         JButton cancelSettingsButton = new JButton("Cancel");
         cancelSettingsButton.setBounds(250, 250, 150, 30);
         settingsPanel.add(cancelSettingsButton);
 
-        // Add panels to CardLayout
+// Add panels to CardLayout
         mainPanel.add(homePanel, "Home");
         mainPanel.add(createTicketPanel, "CreateTicket");
         mainPanel.add(editTicketPanel, "EditTicket");
@@ -276,7 +274,7 @@ public class DynamicTicket1 {
         mainPanel.add(viewTicketPanel, "ViewTicket");
         mainPanel.add(settingsPanel, "Settings");
 
-        // Navigation Panel with Settings Button
+// Navigation Panel with Settings Button
         JPanel chooseTicketPanel = new JPanel();
         chooseTicketPanel.setBounds(0, 0, 200, 700);
         chooseTicketPanel.setLayout(new BoxLayout(chooseTicketPanel, BoxLayout.Y_AXIS));
@@ -289,7 +287,7 @@ public class DynamicTicket1 {
         chooseTicketPanel.add(firstLabelTitle);
         chooseTicketPanel.add(Box.createVerticalStrut(55));
 
-        // Buttons with ActionListeners to switch panels
+// Buttons with ActionListeners to switch panels
         JButton homeButtonTitle = createButton("Home");
         homeButtonTitle.addActionListener(e -> switchPanel(mainPanel, "Home"));
         chooseTicketPanel.add(homeButtonTitle);
@@ -315,19 +313,19 @@ public class DynamicTicket1 {
         chooseTicketPanel.add(ticketListButton);
         chooseTicketPanel.add(Box.createVerticalStrut(145));
 
-        // Settings Button (New)
+// Settings Button (New)
         JButton settingsButton = createButton("Settings");
         settingsButton.addActionListener(e -> switchPanel(mainPanel, "Settings"));
         chooseTicketPanel.add(settingsButton);
 
-        // Add components to the frame
+// Add components to the frame
         frame.add(chooseTicketPanel);
         frame.add(mainPanel);
 
         frame.setVisible(true);
     }
 
-    // Helper method to create buttons with consistent styling
+// Helper method to create buttons with consistent styling
     private static JButton createButton(String text) {
         JButton button = new JButton(text);
         button.setFocusable(false);
