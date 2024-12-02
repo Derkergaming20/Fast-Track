@@ -10,7 +10,7 @@ public class MainFrame {
     public static void main(String[] args) {
 
         JFrame loginFrame = new JFrame("FastTrack Solutions Login");
-        ImageIcon logo = new ImageIcon(/*"need logo"*/);
+        ImageIcon logo = new ImageIcon("FTSLogo.png");
         loginFrame.setSize(600, 600);
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setLayout(null);
@@ -19,7 +19,7 @@ public class MainFrame {
         loginFrame.getContentPane().setBackground(new Color(0x87CEEB));
 
         JFrame signInFrame = new JFrame("FastTrack Solutions SignUp");
-        ImageIcon logo1 = new ImageIcon(/*"need logo"*/);
+        ImageIcon logo1 = new ImageIcon("/Pics/FTSLogo.png");
         signInFrame.setSize(600, 600);
         signInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         signInFrame.setLayout(null);

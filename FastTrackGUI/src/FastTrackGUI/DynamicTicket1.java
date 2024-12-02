@@ -18,7 +18,7 @@ public class DynamicTicket1 {
 
 // CardLayout to switch between panels
         JPanel mainPanel = new JPanel(new CardLayout());
-        mainPanel.setBounds(200, 0, 590, 700);
+        mainPanel.setBounds(200, 0, 590, 600);
 
 // Home Panel
         JPanel homePanel = new JPanel();
@@ -45,7 +45,7 @@ public class DynamicTicket1 {
         JPanel details1 = new JPanel();
         details1.setLayout(null);
         details1.setBackground(Color.LIGHT_GRAY);
-        details1.setBounds(25, 100, 540, 535);
+        details1.setBounds(25, 100, 540, 450);
 
         JTextField usernameField1 = new JTextField();
         usernameField1.setBounds(130, 20, 200, 30);
@@ -104,7 +104,7 @@ public class DynamicTicket1 {
         JPanel details2 = new JPanel();
         details2.setLayout(null);
         details2.setBackground(Color.LIGHT_GRAY);
-        details2.setBounds(25, 100, 540, 535);
+        details2.setBounds(25, 100, 540, 450);
 
         JTextField usernameField2 = new JTextField();
         usernameField2.setBounds(130, 20, 200, 30);
@@ -200,7 +200,7 @@ public class DynamicTicket1 {
         JPanel details4 = new JPanel();
         details4.setLayout(null);
         details4.setBackground(Color.LIGHT_GRAY);
-        details4.setBounds(25, 100, 550, 535);
+        details4.setBounds(25, 100, 550, 450);
 
         JTextField ticketIDFieldView = new JTextField();
         ticketIDFieldView.setBounds(130, 20, 200, 30);
