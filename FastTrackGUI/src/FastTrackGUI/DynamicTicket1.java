@@ -10,10 +10,12 @@ public class DynamicTicket1 {
     public static void main(String[] args) {
 // Main Frame
         JFrame frame = new JFrame("FastTrack Solutions");
+        ImageIcon logo = new ImageIcon("FTSLogo.png");
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
         frame.setResizable(false);
+        frame.setIconImage(logo.getImage());
         frame.getContentPane().setBackground(new Color(0x87CEEB));
 
 // CardLayout to switch between panels
