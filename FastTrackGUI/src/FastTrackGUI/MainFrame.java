@@ -335,6 +335,6 @@ public class MainFrame {
     }
 
     private static String generateUserId() {
-        return "I" + (100 + RANDOM.nextInt(999));
+        return "G" + (100 + RANDOM.nextInt(999));
     }
 }
