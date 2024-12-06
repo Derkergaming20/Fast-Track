@@ -1,6 +1,7 @@
 package FastTrackGUI;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 public class AdminDashboard extends JFrame {
     private JPanel cardPanel;
     private CardLayout cardLayout;
+    private JTable userTable;
 
     public AdminDashboard(Login loginFrame) {
         // Set up the admin dashboard frame
@@ -26,12 +28,12 @@ public class AdminDashboard extends JFrame {
         // Create the dashboard panel
         JPanel dashboardPanel = createDashboardPanel(loginFrame);
 
-        // Create the user table panel
-        JPanel userTablePanel = createUserTablePanel();
+        // Create the user management panel
+        JPanel userManagementPanel = createUserManagementPanel();
 
         // Add panels to CardLayout
         cardPanel.add(dashboardPanel, "Dashboard");
-        cardPanel.add(userTablePanel, "ViewUsers");
+        cardPanel.add(userManagementPanel, "UserManagement");
 
         add(cardPanel);
     }
@@ -49,18 +51,12 @@ public class AdminDashboard extends JFrame {
         manageUsersButton.setBounds(150, 150, 300, 40);
         dashboardPanel.add(manageUsersButton);
 
-        JButton viewUsersButton = new JButton("View Users");
-        viewUsersButton.setBounds(150, 200, 300, 40);
-        dashboardPanel.add(viewUsersButton);
-
         JButton logoutButton = new JButton("Logout");
-        logoutButton.setBounds(150, 250, 300, 40);
+        logoutButton.setBounds(150, 200, 300, 40);
         dashboardPanel.add(logoutButton);
 
-        // Action Listener for View Users Button
-        viewUsersButton.addActionListener(e -> {
-            cardLayout.show(cardPanel, "ViewUsers"); // Switch to the user table panel
-        });
+        // Action Listener for Manage Users Button
+        manageUsersButton.addActionListener(e -> cardLayout.show(cardPanel, "UserManagement"));
 
         // Action Listener for Logout Button
         logoutButton.addActionListener(e -> {
@@ -71,37 +67,79 @@ public class AdminDashboard extends JFrame {
         return dashboardPanel;
     }
 
-    private JPanel createUserTablePanel() {
-        JPanel userTablePanel = new JPanel();
-        userTablePanel.setLayout(new BorderLayout());
+    private JPanel createUserManagementPanel() {
+        JPanel userManagementPanel = new JPanel(new BorderLayout());
 
-        JLabel titleLabel = new JLabel("User List", JLabel.CENTER);
+        JLabel titleLabel = new JLabel("Manage Users", JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        userTablePanel.add(titleLabel, BorderLayout.NORTH);
+        userManagementPanel.add(titleLabel, BorderLayout.NORTH);
 
         // Column names for the table
         String[] columnNames = {"Username", "Role", "UserID"};
 
-        // Data for the table
-        String[][] tableData = loadUserData();
-
-        // Create JTable with the data and column names
-        JTable userTable = new JTable(tableData, columnNames);
-        userTable.setFillsViewportHeight(true);
-
-        // Add the table to a JScrollPane
+        // Create JTable with initial data
+        userTable = new JTable(new DefaultTableModel(loadUserData(), columnNames));
         JScrollPane scrollPane = new JScrollPane(userTable);
-        userTablePanel.add(scrollPane, BorderLayout.CENTER);
+        userManagementPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Add a "Back" button to return to the dashboard
-        JButton backButton = new JButton("Back to Dashboard");
+        JPanel actionPanel = new JPanel();
+        actionPanel.setLayout(new FlowLayout());
+
+        JTextField usernameField = new JTextField(10);
+        JTextField roleField = new JTextField(10);
+        JButton editButton = new JButton("Edit Role");
+        JButton deleteButton = new JButton("Delete User");
+        JButton backButton = new JButton("Back");
+
+        actionPanel.add(new JLabel("Username:"));
+        actionPanel.add(usernameField);
+        actionPanel.add(new JLabel("Role:"));
+        actionPanel.add(roleField);
+        actionPanel.add(editButton);
+        actionPanel.add(deleteButton);
+        actionPanel.add(backButton);
+
+        userManagementPanel.add(actionPanel, BorderLayout.SOUTH);
+
+        // Action Listener for Edit Button
+        editButton.addActionListener(e -> {
+            String username = usernameField.getText();
+            String newRole = roleField.getText();
+            if (!username.isEmpty() && !newRole.isEmpty()) {
+                boolean success = Utils.modifyUserRole(username, newRole);
+                if (success) {
+                    JOptionPane.showMessageDialog(this, "User role updated successfully!");
+                    reloadUserTable();
+                } else {
+                    JOptionPane.showMessageDialog(this, "User not found!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Username and role are required!");
+            }
+        });
+
+        // Action Listener for Delete Button
+        deleteButton.addActionListener(e -> {
+            String username = usernameField.getText();
+            if (!username.isEmpty()) {
+                boolean success = Utils.deleteUser(username);
+                if (success) {
+                    JOptionPane.showMessageDialog(this, "User deleted successfully!");
+                    reloadUserTable();
+                } else {
+                    JOptionPane.showMessageDialog(this, "User not found!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Username is required!");
+            }
+        });
+
+        // Action Listener for Back Button
         backButton.addActionListener(e -> cardLayout.show(cardPanel, "Dashboard"));
-        userTablePanel.add(backButton, BorderLayout.SOUTH);
 
-        return userTablePanel;
+        return userManagementPanel;
     }
 
-    // Load user data from the file
     private String[][] loadUserData() {
         List<String[]> userData = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("users.txt"))) {
@@ -114,8 +152,12 @@ public class AdminDashboard extends JFrame {
             }
         } catch (IOException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error loading users.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         return userData.toArray(new String[0][]);
+    }
+
+    private void reloadUserTable() {
+        String[] columnNames = {"Username", "Role", "UserID"};
+        userTable.setModel(new DefaultTableModel(loadUserData(), columnNames));
     }
 }
