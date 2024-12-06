@@ -66,8 +66,8 @@ public class Utils {
         return null; // Return null if no match is found
     }
 
-    // Modify a user's role
-    public static boolean modifyUserRole(String username, String newRole) {
+    // Modify a user's role based on their User ID
+    public static boolean modifyUserRole(String userId, String newRole) {
         File tempFile = new File("temp_users.txt");
         File originalFile = new File(USERS_FILE);
         boolean found = false;
@@ -78,7 +78,7 @@ public class Utils {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");
-                if (parts[0].equals(username)) {
+                if (parts[3].trim().equals(userId.trim())) { // Compare based on User ID
                     // Modify the role
                     parts[2] = newRole;
                     found = true;
@@ -95,6 +95,39 @@ public class Utils {
         if (tempFile.renameTo(originalFile)) {
             return found;
         } else {
+            return false;
+        }
+    }
+
+    // Delete a user based on User ID
+    public static boolean deleteUser(String userId) {
+        File tempFile = new File("temp_users.txt");
+        File originalFile = new File(USERS_FILE);
+        boolean found = false;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(originalFile));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\\|");
+                if (!parts[3].trim().equals(userId.trim())) { // Compare based on User ID
+                    writer.write(line); // Keep other users
+                    writer.newLine();
+                } else {
+                    found = true; // Mark that the user was found and skipped
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        // Replace the original file with the updated one
+        if (found && tempFile.renameTo(originalFile)) {
+            return true;
+        } else {
+            tempFile.delete();
             return false;
         }
     }

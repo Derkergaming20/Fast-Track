@@ -57,11 +57,6 @@ public class AdminDashboard extends JFrame {
         logoutButton.setBounds(150, 250, 300, 40);
         dashboardPanel.add(logoutButton);
 
-        // Action Listener for Manage Users Button
-        manageUsersButton.addActionListener(e -> {
-            System.out.println("Manage Users button clicked");
-        });
-
         // Action Listener for View Users Button
         viewUsersButton.addActionListener(e -> {
             cardLayout.show(cardPanel, "ViewUsers"); // Switch to the user table panel
@@ -88,22 +83,7 @@ public class AdminDashboard extends JFrame {
         String[] columnNames = {"Username", "Role", "UserID"};
 
         // Data for the table
-        List<String[]> userData = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("users.txt"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("\\|");
-                if (parts.length >= 4) {
-                    userData.add(new String[]{parts[0], parts[2], parts[3]});
-                }
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error loading users.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-        // Convert List to 2D array
-        String[][] tableData = userData.toArray(new String[0][]);
+        String[][] tableData = loadUserData();
 
         // Create JTable with the data and column names
         JTable userTable = new JTable(tableData, columnNames);
@@ -119,5 +99,23 @@ public class AdminDashboard extends JFrame {
         userTablePanel.add(backButton, BorderLayout.SOUTH);
 
         return userTablePanel;
+    }
+
+    // Load user data from the file
+    private String[][] loadUserData() {
+        List<String[]> userData = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("users.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\\|");
+                if (parts.length >= 4) {
+                    userData.add(new String[]{parts[0], parts[2], parts[3]});
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error loading users.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return userData.toArray(new String[0][]);
     }
 }
