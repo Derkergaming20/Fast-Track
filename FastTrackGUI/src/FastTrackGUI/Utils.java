@@ -1,20 +1,20 @@
 package FastTrackGUI;
 
 import java.io.*;
-import java.util.*;
 
 public class Utils {
     private static final String USERS_FILE = "users.txt"; // File to store user data
 
-    // Encrypt password (example only; replace with actual encryption logic)
+    // Encrypt password (simple example: reverse the string)
     public static String encryptPassword(String password) {
-        // Simple placeholder encryption: Reverse the string
         return new StringBuilder(password).reverse().toString();
     }
 
-    // Generate a unique user ID
+    // Generate a unique user ID (1 letter + 3 digits)
     public static String generateUserId() {
-        return UUID.randomUUID().toString();
+        char letter = (char) ('A' + (int) (Math.random() * 26));
+        int number = (int) (Math.random() * 900) + 100;
+        return letter + String.valueOf(number);
     }
 
     // Sign up a user by saving their details to a file
@@ -41,7 +41,7 @@ public class Utils {
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");
                 if (parts[0].equals(username)) {
-                    return true; // Username found
+                    return true; // User exists
                 }
             }
         } catch (IOException e) {
@@ -56,28 +56,14 @@ public class Utils {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");
-                if (parts[0].equals(username) && parts[1].equals(encryptedPassword)) {
-                    return parts; // Return user details
+                if (parts.length >= 2 && parts[0].equals(username) && parts[1].equals(encryptedPassword)) {
+                    return parts; // Return user details if username and password match
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null; // Invalid username or password
-    }
-
-    // Display all users (for admin purposes)
-    public static void displayUsers() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE))) {
-            String line;
-            System.out.println("User List:");
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("\\|");
-                System.out.println("Username: " + parts[0] + ", Role: " + parts[2] + ", UserID: " + parts[3]);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return null; // Return null if no match is found
     }
 
     // Modify a user's role
@@ -110,6 +96,20 @@ public class Utils {
             return found;
         } else {
             return false;
+        }
+    }
+
+    // Display all users (for admin purposes)
+    public static void displayUsers() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE))) {
+            String line;
+            System.out.println("User List:");
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\\|");
+                System.out.println("Username: " + parts[0] + ", Role: " + parts[2] + ", UserID: " + parts[3]);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -66,6 +66,7 @@ public class Login extends JFrame {
                 return;
             }
 
+            // Encrypt password and try to login
             String encryptedPassword = Utils.encryptPassword(password);
             String[] userDetails = Utils.login(username, encryptedPassword);
 
